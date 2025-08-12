@@ -1,0 +1,165 @@
+.todo-input-container {
+  margin-bottom: 32px;
+}
+
+.todo-form {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.todo-form:focus-within {
+  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.15);
+  transform: translateY(-2px);
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+}
+
+.todo-input {
+  flex: 1;
+  border: none;
+  padding: 16px 20px;
+  font-size: 16px;
+  background: transparent;
+  outline: none;
+  color: #2d3748;
+}
+
+.todo-input::placeholder {
+  color: #a0aec0;
+}
+
+.input-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-right: 8px;
+}
+
+.date-toggle-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  opacity: 0.6;
+}
+
+.date-toggle-btn:hover {
+  opacity: 1;
+  background: rgba(102, 126, 234, 0.1);
+}
+
+.date-toggle-btn.has-date {
+  opacity: 1;
+  background: rgba(102, 126, 234, 0.1);
+}
+
+.add-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.add-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.date-picker-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-top: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.date-input {
+  flex: 1;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  background: white;
+  color: #2d3748;
+}
+
+.date-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.clear-date-btn {
+  background: #e53e3e;
+  color: white;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.clear-date-btn:hover {
+  background: #c53030;
+  transform: scale(1.1);
+}
+
+.due-date-preview {
+  padding: 8px 20px;
+  background: rgba(102, 126, 234, 0.05);
+  border-top: 1px solid rgba(102, 126, 234, 0.1);
+  font-size: 12px;
+  color: #667eea;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .todo-input {
+    font-size: 16px; /* Prevent zoom on iOS */
+    padding: 14px 16px;
+  }
+  
+  .input-actions {
+    padding-right: 4px;
+  }
+  
+  .add-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+  
+  .date-picker-container {
+    padding: 12px 16px;
+  }
+  
+  .due-date-preview {
+    padding: 8px 16px;
+  }
+}
