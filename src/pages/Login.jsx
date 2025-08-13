@@ -36,6 +36,7 @@ const Login = () => {
       if (response.token) {
         const userData = {
           username: response.username || formData.username,
+          email: response.email || '',
         };
         
         login(userData, response.token);

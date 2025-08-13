@@ -112,8 +112,8 @@ const TodoApp = () => {
     }
   };
 
-  const completedCount = todos.filter(todo => todo.completed).length;
-  const totalCount = todos.length;
+  const completedCount = todos ? todos.filter(todo => todo.completed).length : 0;
+  const totalCount = todos ? todos.length : 0;
 
   if (loading) {
     return (

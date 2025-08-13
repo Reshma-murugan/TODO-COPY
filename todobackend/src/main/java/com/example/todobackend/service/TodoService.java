@@ -21,8 +21,7 @@ public class TodoService {
     }
     
     public Optional<Todo> getTodoByIdForUser(Long id, User user) {
-        return todoRepository.findById(id)
-                .filter(todo -> todo.getUser().equals(user));
+        return todoRepository.findByIdAndUser(id, user);
     }
     
     public Todo createTodoForUser(Todo todo, User user) {
@@ -32,8 +31,7 @@ public class TodoService {
     }
     
     public Todo updateTodoForUser(Long id, Todo todoDetails, User user) {
-        Todo todo = todoRepository.findById(id)
-                .filter(t -> t.getUser().equals(user))
+        Todo todo = todoRepository.findByIdAndUser(id, user)
                 .orElseThrow(() -> new RuntimeException("Todo not found with id: " + id));
         
         todo.setText(todoDetails.getText());
@@ -45,8 +43,7 @@ public class TodoService {
     }
     
     public void deleteTodoForUser(Long id, User user) {
-        Todo todo = todoRepository.findById(id)
-                .filter(t -> t.getUser().equals(user))
+        Todo todo = todoRepository.findByIdAndUser(id, user)
                 .orElseThrow(() -> new RuntimeException("Todo not found with id: " + id));
         
         todoRepository.delete(todo);
@@ -69,7 +66,6 @@ public class TodoService {
     }
     
     public void clearCompletedTodosForUser(User user) {
-        List<Todo> completedTodos = todoRepository.findByUserAndCompleted(user, true);
-        todoRepository.deleteAll(completedTodos);
+        todoRepository.deleteByUserAndCompleted(user, true);
     }
 }

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import './Navigation.css';
 
@@ -30,7 +31,6 @@ const Navigation = ({
   const handleLogout = () => {
     logout();
     setShowProfileDropdown(false);
-    // Navigation to login will be handled by the ProtectedRoute
   };
 
   const toggleProfileDropdown = () => {
@@ -41,7 +41,9 @@ const Navigation = ({
     <nav className="navigation">
       <div className="nav-content">
         <div className="nav-left">
-          <h1 className="nav-title">My Tasks</h1>
+          <Link to="/" className="nav-title-link">
+            <h1 className="nav-title">My Tasks</h1>
+          </Link>
         </div>
         
         <div className="nav-center">
@@ -50,25 +52,25 @@ const Navigation = ({
               className={filter === 'all' ? 'active' : ''}
               onClick={() => setFilter('all')}
             >
-              All ({totalCount})
+              All ({totalCount || 0})
             </button>
             <button
               className={filter === 'active' ? 'active' : ''}
               onClick={() => setFilter('active')}
             >
-              Active ({totalCount - completedCount})
+              Active ({(totalCount || 0) - (completedCount || 0)})
             </button>
             <button
               className={filter === 'completed' ? 'active' : ''}
               onClick={() => setFilter('completed')}
             >
-              Completed ({completedCount})
+              Completed ({completedCount || 0})
             </button>
           </div>
         </div>
 
         <div className="nav-right">
-          {completedCount > 0 && (
+          {(completedCount || 0) > 0 && (
             <button 
               className="clear-completed-btn"
               onClick={clearCompleted}
@@ -107,6 +109,16 @@ const Navigation = ({
                     <div className="dropdown-email">{user?.email || 'user@example.com'}</div>
                   </div>
                 </div>
+                <Link 
+                  to="/profile" 
+                  className="dropdown-link"
+                  onClick={() => setShowProfileDropdown(false)}
+                >
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                  </svg>
+                  View Profile
+                </Link>
                 <div className="dropdown-divider"></div>
                 <button 
                   className="logout-button"

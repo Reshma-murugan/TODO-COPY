@@ -75,6 +75,16 @@ public class AuthController {
         response.put("token", jwt);
         response.put("username", loginRequest.getUsername());
         
+        // Get user details for response
+        try {
+            User user = userService.findByUsername(loginRequest.getUsername()).orElse(null);
+            if (user != null) {
+                response.put("email", user.getEmail());
+            }
+        } catch (Exception e) {
+            // Continue without email if there's an issue
+        }
+        
         return ResponseEntity.ok(response);
     }
     

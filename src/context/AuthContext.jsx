@@ -40,6 +40,8 @@ export const AuthProvider = ({ children }) => {
     setToken(null);
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    // Force redirect to login
+    window.location.href = '/login';
   };
 
   const isAuthenticated = () => {

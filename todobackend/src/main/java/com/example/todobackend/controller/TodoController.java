@@ -47,9 +47,13 @@ public class TodoController {
         if (user == null) {
             return ResponseEntity.status(401).build();
         }
-        return todoService.getTodoByIdForUser(id, user)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        try {
+            return todoService.getTodoByIdForUser(id, user)
+                    .map(ResponseEntity::ok)
+                    .orElse(ResponseEntity.notFound().build());
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
     }
     
     @PostMapping
